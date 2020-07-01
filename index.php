@@ -13,9 +13,10 @@
 
 <!-- Home -->
   <div id="index" class="container text-center">
-  <h1 class="display-1">Contaminant Control</h1>
-  <p class="lead">Contaminant Control supply Food & Pharma producers throughout Ireland from our base in Dublin.<br>
-  We represent both BST Detectable Products & Greenwood Magnetics here.<br>
+  <!-- <h1 class="display-1">Contaminant Control</h1> -->
+  <p>&nbsp;</p>
+  <p class="lead"><span style="color: red; font-weight: bold">Contaminant Control</span> supply Food & Pharma producers throughout Ireland from our base in Dublin.<br>
+  We represent both <span style="color: blue; font-weight: bold">BST</span> Detectable Products & Greenwood Magnetics here.<br>
   Our aim is to provide single-sourced protection from plastic & ferrous / paramagnetic (metal) contamination for you, your product & customers.<br>
   We want to help you reduce the risk of a costly product recall potentially involving financial penalties and long term damage to your company & brand image
   </p>
