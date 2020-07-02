@@ -15,10 +15,10 @@
   <div id="index" class="container text-center">
   <!-- <h1 class="display-1">Contaminant Control</h1> -->
   <p>&nbsp;</p>
-  <p class="lead"><span style="color: red; font-weight: bold">Contaminant Control</span> supply Food & Pharma producers throughout Ireland from our base in Dublin.<br>
-  We represent both <span style="color: blue; font-weight: bold">BST</span> Detectable Products & Greenwood Magnetics here.<br>
-  Our aim is to provide single-sourced protection from plastic & ferrous / paramagnetic (metal) contamination for you, your product & customers.<br>
-  We want to help you reduce the risk of a costly product recall potentially involving financial penalties and long term damage to your company & brand image
+  <p class="lead"><span style="color: red; font-weight: bold">Contaminant Control</span> supply Food & Pharma producers throughout Ireland from our base in Dublin.</p>
+  <p class="lead">We represent both <span style="color: blue; font-weight: bold">BST</span> Detectable Products & <span style="color:rgb(19, 135, 107); font-weight: bold">Greenwood</span> Magnetics here.</p>
+  <p class="lead">Our aim is to provide single-sourced protection from plastic & ferrous / paramagnetic (metal) contamination for you, your product & customers.</p>
+  <p class="lead">We want to help you <strong>reduce the risk</strong> of a costly product recall potentially involving financial penalties and long term damage to your company & brand image
   </p>
   </div>
 <!-- /Home -->
@@ -78,24 +78,103 @@
   <div id="contact" class="container pt-5">
     <div class="row">
       <div class="col">
-        <h2 class="display-2">Contact Us</h2>
+        <h2 class="display-3 text-center"><span style=" color: red">Contact Us</span></h2>
         <p class="lead">
-          David Bradley<br>
+          <strong>David Bradley</strong><br>
           Contaminant Control<br>
           Kingswood, Dublin 24<br>
           D24-YNFK<br>
           <br>
-          Tel: 353-87-2591488 & 01-558-2988<br>
-          Fax: 353-1-696-8999<br>
+          <strong>Tel: </strong> 353-87-2591488 & 01-558-2988<br>
+          <strong>Fax: </strong> 353-1-696-8999<br>
           <br>
-          Email: david@contaminant-control.com<br>
-          Web: www.contaminant-control.com<br>
+          <strong>Email: </strong><a href="mailto:david@contaminant-control.com"> david@contaminant-control.com</a><br>
+          <strong>Web: </strong>www.contaminant-control.com<br>
           <br>
-          Standard BST items ex-Dublin stock for a next day delivery.<br>
+          Standard BST items ex-Dublin stock for a <strong>next day delivery</strong>.<br>
           Please do not hesitate to contact us for brochures, samples or on-site visits / consultations.
         </p>
+
+        <?php
+        if(isset($_POST["email"])<>'')
+        {
+        $ToEmail = 'rourkebradley@gmail.com';
+        $EmailSubject = 'Contaminant Control contact form';
+        $mailheader = "From: ".$_POST["email"]."\r\n";
+        $mailheader .= "Reply-To: ".$_POST["email"]."\r\n";
+        $mailheader .= "Content-type: text/html; charset=iso-8859-1\r\n";
+        $MESSAGE_BODY = "Name: ".$_POST["name"]."<br>";
+        $MESSAGE_BODY .= "Email: ".$_POST["email"]."<br>";
+        $MESSAGE_BODY .= "Phone Number: ".$_POST["phone"]."<br>";
+        $MESSAGE_BODY .= "Message: ".nl2br($_POST["comment"])."<br>";
+        $MESSAGE_BODY .= "Areas of interest" . "<br>";
+        $MESSAGE_BODY .= $_POST["rareEarthMagnets"] . "<br>";
+        $MESSAGE_BODY .= $_POST["magnetTesting"] . "<br>";
+        $MESSAGE_BODY .= $_POST["detectableProducts"] . "<br>";
+        mail($ToEmail, $EmailSubject, $MESSAGE_BODY, $mailheader) or die ("Failure");
+
+        ?>
+        <h2>Your message was sent</h2>
+        <?php
+        } else {
+        ?>
+
+        <div class="text-center">
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Send us an enquiry!</button>
       </div>
+      </div>
+
+      <!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title">Enquiry Form</h4>
+      </div>
+      <div class="modal-body">
+        <form action="contact.php" method="post">
+
+          <div class="form-group">
+          <input type="text"  id="name" name="name" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="phone" name="phone" placeholder="Contact Number">
+          </div>
+
+          <div class="form-group">
+          <input type="text" id="email" name="email" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+          <textarea cols="21" rows="7" id="comment" name="comment" placeholder="Message" required></textarea>
+          </div>
+          <div class="form-group">
+            <p>Product areas of interest (tick box)</p>
+            <input type="checkbox" id="rareEarthMagnets" name="rareEarthMagnets" value="Rare Earth Magnets">
+            <label for="rareEarthMagnets">Rare Earth Magnets</label><br>
+            <input type="checkbox" id="magnetTesting" name="magnetTesting" value="Magnet Testing">
+            <label for="magnetTesting">Magnet Testing</label><br>
+            <input type="checkbox" id="detectableProducts" name="detectableProducts" value="Detectable Products">
+            <label for="rareEarthMagnets">Detectable Products</label><br>
+          </div>
+          <div class="form-group">
+          <input type="submit" name="Submit" value="Submit" >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<?php
+};
+ ?>
       <div class="col">
         <!-- img -->
           <div class="container text-sm-center pt-5">
@@ -104,6 +183,7 @@
         <!-- /img -->
       </div>
     </div>
+    <br>
   </div>
 
 <!-- footer -->
