@@ -1,11 +1,37 @@
 <?php
-// Import PHPMailer classes into the global namespace
-// These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-require 'phpmailer/vendor/autoload.php';
+$result='';
+if(isset($_POST['submit']))
+{
+  require 'PHPmailer/PHPMailerAutoload.php';
+  $mail = new PHPMailer;      //new object created
+  $mail->Host = "smtp.gmail.com";
+  $mail->Port = 587;
+  $mail->SMTPAuth = true;
+  $mail ->SMTPSecure = "tls";
+  $mail->Username = "rourkebradley@gmail.com";
+  $mail->Password = "l1verp00l97";
+  $mail->setFrom($_POST['email'], $_POST['name']);
+  $mail->addAddress('rourkebradley@gmail.com');
+  $mail->addReplyTo($_POST['email'], $_POST['name']);
+  $mail->isHTML(true);
+  $mail->Subject = "Contaminant Control Contact Form";
+  $mail->Body = "Name: " . $_POST['name'] . "<br> Email Address: "
+  . $_POST['email'] . "<br> Phone Number: " . $_POST['phone'] . "<br> Message: "
+  . $_POST['comment'] . "<br> Areas of interest: " . "<br> " . $_POST["rareEarthMagnets"] . "<br>"
+  . $_POST["magnetTesting"] . "<br>" . $_POST["detectableProducts"];
+
+  if(!$mail->send())
+  {
+    $result = "Something Went Wrong, Please try again.";
+  } else {
+    $result = $_POST['name'] .  " :Success, your message was sent";
+  }
+
+}
+
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -103,77 +129,11 @@ require 'phpmailer/vendor/autoload.php';
           Please do not hesitate to contact us for brochures, samples or on-site visits / consultations.
         </p>
 
-        <?php
 
-        // Load Composer's autoloader
-        //require 'vendor/autoload.php';
-
-        $mail = new PHPMailer(true);    //new object
-        try {
-          //SMTP Server configuration
-          $mail->SMTPDebug = 2;
-          $mail->isSMTP();
-          $mail->Host = 'smtp.gmail.com';
-          $mail->SMTPAuth = true;
-          $mail->Username = 'rourkebradley@gmail.com';
-          $mail->Password = 'password';
-          $mail->SMTPSecure = 'tls';
-          $mail->Port = 587;
-
-          //Recipients
-          $mail->setFrom('rourkebradley@gmail.com', 'David Bradley - Contaminant Control');
-          $mail->addAddress('rourkebradley@gmail.com');
-          $mail->addReplyTo('rourkebradley@gmail.com');
-
-          //Content
-          $mail->isHTML(true);
-          $mail->Subject = 'Contaminant Control Contact Form';
-          $mail->Body =  "Name: ". $_POST["name"]."<br>";
-          $mail->Body .= "Email: ". $_POST["email"]."<br>";
-          $mail->Body .= "Phone Number: ". $_POST["phone"]."<br>";
-          $mail->Body .= "Message: ".nl2br($_POST["comment"])."<br>";
-          $mail->Body .= "Areas of interest" . "<br>";
-          $mail->Body .= $_POST["rareEarthMagnets"] . "<br>";
-          $mail->Body .= $_POST["magnetTesting"] . "<br>";
-          $mail->Body .= $_POST["detectableProducts"] . "<br>";
-
-          $mail->send();
-          echo "Your message has been sent!";
-
-        } catch (Exception $e)
-        {
-          echo "Error: Message could not be sent!";
-        }
-
-        ?>
-
-        <?php
-        /*
-        if(isset($_POST["email"])<>'')
-        {
-        $ToEmail = 'rourkebradley@gmail.com';
-        $EmailSubject = 'Contaminant Control contact form';
-        $mailheader = "From: ".$_POST["email"]."\r\n";
-        $mailheader .= "Reply-To: ".$_POST["email"]."\r\n";
-        $mailheader .= "Content-type: text/html; charset=iso-8859-1\r\n";
-        $MESSAGE_BODY = "Name: ".$_POST["name"]."<br>";
-        $MESSAGE_BODY .= "Email: ".$_POST["email"]."<br>";
-        $MESSAGE_BODY .= "Phone Number: ".$_POST["phone"]."<br>";
-        $MESSAGE_BODY .= "Message: ".nl2br($_POST["comment"])."<br>";
-        $MESSAGE_BODY .= "Areas of interest" . "<br>";
-        $MESSAGE_BODY .= $_POST["rareEarthMagnets"] . "<br>";
-        $MESSAGE_BODY .= $_POST["magnetTesting"] . "<br>";
-        $MESSAGE_BODY .= $_POST["detectableProducts"] . "<br>";
-        mail($ToEmail, $EmailSubject, $MESSAGE_BODY, $mailheader) or die ("Failure");
-        */
-        ?>
-        <!--<h2>Your message was sent</h2> -->
-        <?php/*
-      } else {*/
-        ?>
 
         <div class="text-center">
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Send us an enquiry!</button>
+        <?php echo  $result; ?>
       </div>
       </div>
 
@@ -188,7 +148,7 @@ require 'phpmailer/vendor/autoload.php';
         <h4 class="modal-title">Enquiry Form</h4>
       </div>
       <div class="modal-body">
-        <form action="contact.php" method="post">
+        <form action="#contact" method="post">
 
           <div class="form-group">
           <input type="text"  id="name" name="name" placeholder="Name" required>
@@ -225,9 +185,6 @@ require 'phpmailer/vendor/autoload.php';
   </div>
 </div>
 
-<?php/*
-};*/
- ?>
       <div class="col">
         <!-- img -->
           <div class="container text-sm-center pt-5">
