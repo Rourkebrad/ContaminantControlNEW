@@ -96,6 +96,51 @@
         </p>
 
         <?php
+
+        // Load Composer's autoloader
+        //require 'vendor/autoload.php';
+
+        $mail = new PHPMailer(true);    //new object
+        try {
+          //SMTP Server configuration
+          $mail->SMTPDebug = 2;
+          $mail->isSMTP();
+          $mail->Host = 'smtp.gmail.com';
+          $mail->SMTPAuth = true;
+          $mail->Username = 'rourkebradley@gmail.com';
+          $mail->Password = 'password';
+          $mail->SMTPSecure = 'tls';
+          $mail->Port = 587;
+
+          //Recipients
+          $mail->setFrom('rourkebradley@gmail.com', 'David Bradley - Contaminant Control');
+          $mail->addAddress('rourkebradley@gmail.com');
+          $mail->addReplyTo('rourkebradley@gmail.com');
+
+          //Content
+          $mail->isHTML(true);
+          $mail->Subject = 'Contaminant Control Contact Form';
+          $mail->Body =  "Name: ". $_POST["name"]."<br>";
+          $mail->Body .= "Email: ". $_POST["email"]."<br>";
+          $mail->Body .= "Phone Number: ". $_POST["phone"]."<br>";
+          $mail->Body .= "Message: ".nl2br($_POST["comment"])."<br>";
+          $mail->Body .= "Areas of interest" . "<br>";
+          $mail->Body .= $_POST["rareEarthMagnets"] . "<br>";
+          $mail->Body .= $_POST["magnetTesting"] . "<br>";
+          $mail->Body .= $_POST["detectableProducts"] . "<br>";
+
+          $mail->send();
+          echo "Your message has been sent!";
+
+        } catch (Exception $e)
+        {
+          echo "Error: Message could not be sent!";
+        }
+
+        ?>
+
+        <?php
+        /*
         if(isset($_POST["email"])<>'')
         {
         $ToEmail = 'rourkebradley@gmail.com';
@@ -112,11 +157,11 @@
         $MESSAGE_BODY .= $_POST["magnetTesting"] . "<br>";
         $MESSAGE_BODY .= $_POST["detectableProducts"] . "<br>";
         mail($ToEmail, $EmailSubject, $MESSAGE_BODY, $mailheader) or die ("Failure");
-
+        */
         ?>
-        <h2>Your message was sent</h2>
-        <?php
-        } else {
+        <!--<h2>Your message was sent</h2> -->
+        <?php/*
+      } else {*/
         ?>
 
         <div class="text-center">
@@ -172,8 +217,8 @@
   </div>
 </div>
 
-<?php
-};
+<?php/*
+};*/
  ?>
       <div class="col">
         <!-- img -->
