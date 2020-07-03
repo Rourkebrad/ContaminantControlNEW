@@ -1,4 +1,6 @@
-
+<?php
+require __DIR__ . '/vendor/autoload.php';
+?>
 <head>
 <!-- Required meta tags -->
 <!-- Google GSuite verification -->
