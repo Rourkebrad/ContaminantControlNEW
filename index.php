@@ -9,7 +9,7 @@ if(isset($_POST['submit']))
   $mail->SMTPAuth = true;
   $mail ->SMTPSecure = "tls";
   $mail->Username = "rourkebradley@gmail.com";
-  $mail->Password = "l1verp00l97";
+  $mail->Password ="";
   $mail->setFrom($_POST['email'], $_POST['name']);
   $mail->addAddress('rourkebradley@gmail.com');
   $mail->addReplyTo($_POST['email'], $_POST['name']);
