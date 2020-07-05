@@ -1,15 +1,19 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor\autoload.php';
+
 $result='';
 if(isset($_POST['submit']))
 {
-  require 'PHPmailer/PHPMailerAutoload.php';
+
   $mail = new PHPMailer;      //new object created
   $mail->Host = "smtp.gmail.com";
   $mail->Port = 587;
   $mail->SMTPAuth = true;
   $mail ->SMTPSecure = "tls";
   $mail->Username = "rourkebradley@gmail.com";
-  $mail->Password = "l1verp00l97";
+  $mail->Password = "";
   $mail->setFrom($_POST['email'], $_POST['name']);
   $mail->addAddress('rourkebradley@gmail.com');
   $mail->addReplyTo($_POST['email'], $_POST['name']);
@@ -133,7 +137,6 @@ if(isset($_POST['submit']))
 
         <div class="text-center">
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Send us an enquiry!</button>
-        <?php echo  $result; ?>
       </div>
       </div>
 
