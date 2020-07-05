@@ -2,43 +2,57 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor\autoload.php';
+$result="";
 
-$result='';
-if(isset($_POST['submit']))
-{
-
-  $mail = new PHPMailer;      //new object created
+    if(isset($_POST['Submit']))
+    {
+      try {
+  $mail = new PHPMailer(true);      //new object created
   $mail->Host = "smtp.gmail.com";
   $mail->Port = 587;
   $mail->SMTPAuth = true;
   $mail ->SMTPSecure = "tls";
   $mail->Username = "rourkebradley@gmail.com";
-<<<<<<< HEAD
   $mail->Password = "";
-=======
-  $mail->Password ="";
->>>>>>> ec3040ebd324fe24bf06306fcf310c339131c374
   $mail->setFrom($_POST['email'], $_POST['name']);
   $mail->addAddress('rourkebradley@gmail.com');
   $mail->addReplyTo($_POST['email'], $_POST['name']);
   $mail->isHTML(true);
   $mail->Subject = "Contaminant Control Contact Form";
-  $mail->Body = "Name: " . $_POST['name'] . "<br> Email Address: "
-  . $_POST['email'] . "<br> Phone Number: " . $_POST['phone'] . "<br> Message: "
-  . $_POST['comment'] . "<br> Areas of interest: " . "<br> " . $_POST["rareEarthMagnets"] . "<br>"
-  . $_POST["magnetTesting"] . "<br>" . $_POST["detectableProducts"];
-
-  if(!$mail->send())
+  $mail->Body = "Name: " . $_POST['name'];
+  $mail->Body .= "<br> Email Address: ". $_POST['email'];
+  $mail->Body .= "<br> Phone Number: " . $_POST['phone'];
+  $mail->Body .= "<br> Message: ". $_POST['comment'];
+  $mail->Body .= "<br> Areas of interest: ";
+  if(isset($_POST['rareEarthMagnets']))
   {
-    $result = "Something Went Wrong, Please try again.";
-  } else {
-    $result = $_POST['name'] .  " :Success, your message was sent";
+    $mail->Body .= "<br> " . $_POST["rareEarthMagnets"] . "<br>";
+  }
+  if(isset($_POST['magnetTesting']))
+  {
+    $mail->Body .= $_POST["magnetTesting"] . "<br>";
+  }
+  if(isset($_POST['detectableProducts']))
+  {
+    $mail->Body .= $_POST["detectableProducts"];
   }
 
-}
+  $mail->send();
+  $result =  "Your message has been sent";
 
+      }
+
+      catch (Exception $e)
+      {
+        echo "Error: Message did not send <br>";
+        echo $e->errorMessage();
+      }
+      catch (\Exception $e)
+      {
+        echo $e->getMessage();
+      }
+    }
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -54,28 +68,35 @@ if(isset($_POST['submit']))
 <!-- /navbar -->
 
 <!-- Home -->
-  <div id="index" class="container text-center">
+<?php
+$bst = "<span style=\"color: #005C9D; font-weight: bold\">BST</span>";
+$greenwood = "<span style=\"color: rgb(14, 139, 40); font-weight: bold\">Greenwood</span>";
+?>
+  <div id="index" class="container text-center ">
   <!-- <h1 class="display-1">Contaminant Control</h1> -->
   <p>&nbsp;</p>
+  <p>&nbsp;</p>
   <p class="lead"><span style="color: red; font-weight: bold">Contaminant Control</span> supply Food & Pharma producers throughout Ireland from our base in Dublin.</p>
-  <p class="lead">We represent both <span style="color: blue; font-weight: bold">BST</span> Detectable Products & <span style="color:rgb(19, 135, 107); font-weight: bold">Greenwood</span> Magnetics here.</p>
+  <p class="lead">We represent both <?php echo $bst;?> Detectable Products & <?php echo $greenwood; ?> Magnetics here.</p>
   <p class="lead">Our aim is to provide single-sourced protection from plastic & ferrous / paramagnetic (metal) contamination for you, your product & customers.</p>
   <p class="lead">We want to help you <strong>reduce the risk</strong> of a costly product recall potentially involving financial penalties and long term damage to your company & brand image
   </p>
+  <p>&nbsp;</p>
   </div>
 <!-- /Home -->
 
-  <div id="detectables" class="container pt-5">
+  <div id="detectables" class="container pt-5 mb-4">
+    <h2 class="display-3 text-center"><span style=" color: red">BST Detectable Products</span></h2>
+    <p>&nbsp;</p>
     <div class="row">
       <div class="col">
-        <h2 class="display-4 text-sm-center">BST Detectable Products</h2>
         <p class="lead">
-          BST was established in 1985.
-          They invented the original (and world's first) detectable pen in 1994 & now supply over 1.8m of these annually.<br>
-          Through performance & reputation BST remain the preferred choice supplier of many leading companies worldwide.<br>
-          BST offer a complete range of product to meet the BRC - HACCP - GMP due diligence obligations of the bakery - confectionery - meat - fish - fruit - veg & pre-prepared meal sectors.<br>
-          BST's new XDETECT material is one of the most detectable , strong and colourful plastic compounds available.<br>
-          BST products made from XDETECT benefit from the following properties:<br>
+          <?php echo $bst;?> was established in 1985.
+          They invented the <strong>original</strong> (and world's first) detectable pen in 1994 & now supply over 1.8m of these annually.<br>
+          Through performance & reputation <?php echo $bst;?> remain the preferred choice supplier of many leading companies worldwide.<br>
+          <?php echo $bst;?> offer a <strong>complete range</strong> of product to meet the BRC - HACCP - GMP due diligence obligations of the bakery - confectionery - meat - fish - fruit - veg & pre-prepared meal sectors.<br>
+          <?php echo $bst;?>'s new <strong>XDETECT</strong> material is one of the most detectable , strong and colourful plastic compounds available.<br>
+          <?php echo $bst;?> products made from <strong>XDETECT</strong> benefit from the following properties:<br>
           <ul>
             <li>Detectable & distinctive</li>
             <li>X-ray visible</li>
@@ -83,8 +104,10 @@ if(isset($_POST['submit']))
             <li>Anti-bacterial protection</li>
             <li>Food safe to FDA & EU standards</li>
           </ul>
-          For more details please go to www.bst-detectable.com
-        </p>
+          </p>
+          <p class="lead">
+          For more details please go to <br> <a href="https://www.bst-detectable.com/" target="_blank"><span style="color: #005C9D;font-weight: bold">www.bst-detectable.com</span></a>
+          </p>
       </div>
       <div class="col">
           <div class="embed-responsive embed-responsive-16by9">
@@ -96,17 +119,20 @@ if(isset($_POST['submit']))
 
 
   <div id="magnet" class="container pt-5">
+    <h2 class="display-3 text-center"><span style=" color: red">Hi-Strength Rare Earth Magnets & On-Site Gauss Testing</span></h2>
+    <p>&nbsp;</p>
     <div class="row">
       <div class="col">
-        <h2 class="display-4 text-sm-center">Hi-Strength Rare Earth Magnets & On-Site Gauss Testing</h2>
         <p class="lead">
-          Greenwood Magnetics is a 3rd generation family run business that was set up in 1948.<br>
+          <?php echo $greenwood; ?> Magnetics is a 3rd generation family run business that was set up in 1948.<br>
           They supply to food, pharma, powder handling & plastics companies globally.<br>
-          Greenwood can offer bespoke magnetic separation solutions at a reasonable cost.<br>
-          Rare Earth magnets guard against ferrous / paramagnetic contaminants (down to sub-micron size) to reduce the risk of a costly product recall and / or damage to machinery.<br>
-          For more details please go to www.greenwoodmagnetics.com
-
+          <?php echo $greenwood; ?> can offer <span style="color: red;">bespoke magnetic separation solutions</span> at a reasonable cost.<br>
+          Rare Earth <strong>magnets guard against</strong> ferrous / paramagnetic contaminants (down to sub-micron size) to reduce the risk of a costly product recall and / or damage to machinery.<br>
+          </p>
+          <p class="lead">
+          For more details please go to <a href="https://www.greenwoodmagnetics.com/"target="_blank"><span style="color:rgb(14, 139, 40);font-weight: bold ">www.greenwoodmagnetics.com</span></a>
         </p>
+
       </div>
       <div class="col">
         <div class="embed-responsive embed-responsive-16by9">
@@ -114,6 +140,7 @@ if(isset($_POST['submit']))
         </div>
       </div>
     </div>
+    <p>&nbsp;</p>
   </div>
 
 
@@ -121,6 +148,7 @@ if(isset($_POST['submit']))
     <div class="row">
       <div class="col">
         <h2 class="display-3 text-center"><span style=" color: red">Contact Us</span></h2>
+        <p>&nbsp;</p>
         <p class="lead">
           <strong>David Bradley</strong><br>
           Contaminant Control<br>
@@ -141,6 +169,7 @@ if(isset($_POST['submit']))
 
         <div class="text-center">
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Send us an enquiry!</button>
+          <?php echo "<br>" .  $result; ?>
       </div>
       </div>
 
@@ -150,27 +179,27 @@ if(isset($_POST['submit']))
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header navbar">
 
-        <h4 class="modal-title">Enquiry Form</h4>
+        <h4 class="modal-title w-100 text-center text-light">Enquiry Form</h4>
       </div>
       <div class="modal-body">
         <form action="#contact" method="post">
 
-          <div class="form-group">
+          <div class="form-group w-100 text-center">
           <input type="text"  id="name" name="name" placeholder="Name" required>
         </div>
-        <div class="form-group">
-          <input type="text" id="phone" name="phone" placeholder="Contact Number">
+        <div class="form-group w-100 text-center">
+          <input type="tel" id="phone" name="phone" placeholder="Contact Number">
           </div>
 
-          <div class="form-group">
-          <input type="text" id="email" name="email" placeholder="Email Address" required>
+          <div class="form-group w-100 text-center">
+          <input type="email" id="email" name="email" placeholder="Email Address" required>
           </div>
-          <div class="form-group">
-          <textarea cols="21" rows="7" id="comment" name="comment" placeholder="Message" required></textarea>
+          <div class="form-group w-100 text-center">
+          <textarea cols="50" rows="7" id="comment" name="comment" placeholder="Message" required></textarea>
           </div>
-          <div class="form-group">
+          <div class="form-group  text-center">
             <p>Product areas of interest (tick box)</p>
             <input type="checkbox" id="rareEarthMagnets" name="rareEarthMagnets" value="Rare Earth Magnets">
             <label for="rareEarthMagnets">Rare Earth Magnets</label><br>
@@ -179,9 +208,10 @@ if(isset($_POST['submit']))
             <input type="checkbox" id="detectableProducts" name="detectableProducts" value="Detectable Products">
             <label for="rareEarthMagnets">Detectable Products</label><br>
           </div>
-          <div class="form-group">
-          <input type="submit" name="Submit" value="Submit" >
+          <div class="form-group w-100 text-center">
+          <input type="submit" class="btn btn-info btn-lg" name="Submit" value="Submit" >
           </div>
+
         </form>
       </div>
       <div class="modal-footer">
@@ -206,6 +236,7 @@ if(isset($_POST['submit']))
 <!-- footer -->
 <?php include("inc/footer.php"); ?>
 <!-- /footer -->
+
 
 <!-- Optional JavaScript  -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
