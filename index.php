@@ -15,7 +15,7 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
     $mail ->SMTPSecure = "tls";
     $mail->Username = "rourkebradley@gmail.com";
     $mail->Password = "";
-    $secret = '6LeFYK4ZAAAAANFmd0nZva7ZR7Fw8Bte3BudlVNb';
+    $secret = '';
     $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
       $responseData = json_decode($verifyResponse);
       $mail->setFrom(filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL), filter_input(INPUT_POST,"name",FILTER_SANITIZE_STRING));
