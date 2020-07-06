@@ -3,7 +3,6 @@
 <!-- Just an image -->
 <br>
 
-
 <nav class="navbar">
   <div class="container">
     <a></a>
