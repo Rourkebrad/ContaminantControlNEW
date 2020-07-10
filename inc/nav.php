@@ -1,15 +1,24 @@
 <!-- navbar -->
-  <nav class="navbar navbar-dark bg-primary fixed-top">
-    <div class="container">
-            <a href="#index"><button class="btn btn-danger navbar-btn">Home</button></a>
-            <a href="#detectables"><button class="btn btn-danger navbar-btn">Detectable Products</button></a>
-            <a href="#magnet"><button class="btn btn-danger navbar-btn">Magnet Supply & Testing</button></a>
-            <a href="#contact"><button class="btn btn-danger navbar-btn">Contact Us</button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <div class=" container navbar-nav">
+            <a href="#index"><button class="js-scroll-trigger nav-item nav-linkbtn btn-danger navbar-btn">Home</button></a>
+            <a href="#detectables"><button class="js-scroll-trigger nav-item nav-linkbtn btn-danger navbar-btn">Detectable Products</button></a>
+            <a href="#magnet"><button class="js-scroll-trigger nav-item nav-linkbtn btn-danger navbar-btn">Magnet Supply & Testing</button></a>
+            <a href="#contact"><button class="js-scroll-trigger nav-item nav-linkbtn btn-danger navbar-btn">Contact Us</button>
     </div>
+  </div>
+
   </nav>
 <!-- /navbar -->
 
 <!-- img -->
+<div class="container">
   <div class="container text-sm-center pt-5">
   <img  src="images/headerRourke.jpg" class="img-fluid" alt="Contaminant Control - Official Distributor of BST Detectable Products"/>
   </div>
@@ -42,4 +51,5 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+</div>
 <!-- //carousel -->

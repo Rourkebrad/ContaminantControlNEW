@@ -97,10 +97,10 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
     <!-- /Home -->
 
     <div id="detectables" class="container pt-5 mb-4">
-      <h2 class="display-3 text-center"><span style=" color: red">BST Detectable Products</span></h2>
+      <h2 class="display-5 text-center"><span style=" color: red">BST Detectable Products</span></h2>
       <p>&nbsp;</p>
       <div class="row">
-        <div class="col">
+        <div class="col-lg">
           <p class="lead">
             <?php echo $bst;?> was established in 1985.
             They invented the <strong>original</strong> (and world's first) detectable pen in 1994 & now supply over 1.8m of these annually.<br>
@@ -120,7 +120,7 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
             For more details please go to <br> <a href="https://www.bst-detectable.com/" target="_blank"><span style="color: #005C9D;font-weight: bold">www.bst-detectable.com</span></a>
           </p>
         </div>
-        <div class="col">
+        <div class="col-lg">
           <div class="embed-responsive embed-responsive-16by9">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/lBtN2R9wPq0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
@@ -129,10 +129,10 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
     </div>
 
     <div id="magnet" class="container pt-5">
-      <h2 class="display-3 text-center"><span style=" color: red">Hi-Strength Rare Earth Magnets & On-Site Gauss Testing</span></h2>
+      <h2 class="display-5 text-center"><span style=" color: red">Hi-Strength Rare Earth Magnets & On-Site Gauss Testing</span></h2>
       <p>&nbsp;</p>
       <div class="row">
-        <div class="col">
+        <div class="col-lg">
           <p class="lead">
             <?php echo $greenwood; ?> Magnetics is a 3rd generation family run business that was set up in 1948.<br>
             They supply to food, pharma, powder handling & plastics companies globally.<br>
@@ -144,7 +144,7 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
           </p>
 
         </div>
-        <div class="col">
+        <div class="col-lg">
           <div class="embed-responsive embed-responsive-16by9">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/bsyyC0ZBePY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
@@ -156,8 +156,8 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
 
     <div id="contact" class="container pt-5">
       <div class="row">
-        <div class="col">
-          <h2 class="display-3 text-center"><span style=" color: red">Contact Us</span></h2>
+        <div class="col-lg">
+          <h2 class="display-5 text-center"><span style=" color: red">Contact Us</span></h2>
           <p>&nbsp;</p>
           <p class="lead">
             <strong>David Bradley</strong><br>
@@ -207,7 +207,7 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
                     <input type="email" id="email" name="email" placeholder="Email Address" required>
                   </div>
                   <div class="form-group w-100 text-center">
-                    <textarea cols="50" rows="7" id="comment" name="comment" placeholder="Message" required></textarea>
+                    <textarea class="form-control" rows="7" id="comment" name="comment" placeholder="Message" required></textarea>
                   </div>
                   <div class="form-group  text-center">
                     <p>Product areas of interest (tick box)</p>
@@ -236,7 +236,7 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
           </div>
         </div>
 
-        <div class="col">
+        <div class="col-lg d-none d-lg-block">
           <!-- img -->
           <div class="container text-sm-center pt-5">
             <img  src="images/contamiant-control-map.jpg" class="img-fluid" alt="Contaminant Control - Official Distributor of BST Detectable Products"/>
@@ -263,6 +263,12 @@ if(isset($_POST['Submit']) && isset($_POST['g-recaptcha-response']) && !empty($_
       document.getElementById("button1").disabled = false;
     }
     </script>
+    <script type="text/javascript">
+           $('.js-scroll-trigger').click(function() {
+    $('.navbar-collapse').collapse('hide');
+  });
+      </script>
+
 
   </body>
   </html>
